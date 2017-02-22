@@ -1,21 +1,24 @@
 #문제1
 ##1-1
 ```javascript
-//1240진법은 곧 4진법에서 숫자 3을 4로 고친 것과 같다
-var problemName="1240";
-var divider=problemName.length;
-
 //10진법의 수를 4진법의 수로 바꾸기 위해 나머지랑 인수를 얻기
 function to1230(num){
   var digitArr=[];
-  var reminder=num%divider;
-  var int=(num-reminder)/divider;
-  digitArr.push(reminder);
-  if(int>=divider){
-    return to1230(int,divider);
-  }else if(int===0){
-    return digitArr;
-  }else{
+  var dividedNum=num;
+  var remainder=dividedNum%4;
+  var int=(dividedNum-remainder)/4;
+  while(int>=4){
+    remainder=dividedNum%4;
+    int=(dividedNum-remainder)/4;
+    digitArr.push(remainder);
+    dividedNum=int;
+    if(int<4){
+      digitArr.push(int);
+      return digitArr;
+    }
+  }
+  if(int<4){
+    digitArr.push(remainder);
     digitArr.push(int);
     return digitArr;
   }
@@ -32,11 +35,12 @@ function reverseArr(arr){
 
 //3을 4로 바꾸기
 function to1240(num){
-  var arr= reverseArr(to1230(num,divider));
+  var arr= reverseArr(to1230(num));
   var str=arr.join("");
   var result=str.replace(/3/g,"4");
   return result;
 }
+
 ```
 
 ##1-2
@@ -48,7 +52,7 @@ function from4to3(num){
   return result;
 }
 
-//숫자num을 j제곱하는 함수
+//숫자 4를 j제곱하는 함수
 function multiple(num,j){
   var result=1;
   for(var i=1; i<=j; i++){
@@ -56,13 +60,12 @@ function multiple(num,j){
   }
   return result;
 }
-
 //4진법의 수를 10진법으로 바꾸기
 function toDec(num){
   var str=from4to3(num);
   var result=0;
   for(var i=0; i<str.length; i++){
-    result=result+str[i]*multiple(divider,str.length-1-i);
+    result=result+str[i]*multiple(4,str.length-1-i);
   }
   return result;
 }
