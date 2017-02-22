@@ -1,19 +1,25 @@
-var problemName="1240";
-var divider=problemName.length;
 function to1230(num){
   var digitArr=[];
-  var reminder=num%divider;
-  var int=(num-reminder)/divider;
-  digitArr.push(reminder);
-  if(int>=divider){
-    return to1230(int,divider);
-  }else if(int===0){
-    return digitArr;
-  }else{
+  var dividedNum=num;
+  var remainder=dividedNum%4;
+  var int=(dividedNum-remainder)/4;
+  while(int>=4){
+    remainder=dividedNum%4;
+    int=(dividedNum-remainder)/4;
+    digitArr.push(remainder);
+    dividedNum=int;
+    if(int<4){
+      digitArr.push(int);
+      return digitArr;
+    }
+  }
+  if(int<4){
+    digitArr.push(remainder);
     digitArr.push(int);
     return digitArr;
   }
 }
+
 function reverseArr(arr){
   var orderedArr=[];
   for(var i=arr.length-1; i>=0; i--){
@@ -23,7 +29,7 @@ function reverseArr(arr){
 }
 
 function to1240(num){
-  var arr= reverseArr(to1230(num,divider));
+  var arr= reverseArr(to1230(num));
   var str=arr.join("");
   var result=str.replace(/3/g,"4");
   return result;
@@ -48,8 +54,8 @@ function toDec(num){
   var str=from4to3(num);
   var result=0;
   for(var i=0; i<str.length; i++){
-    result=result+str[i]*multiple(divider,str.length-1-i);
+    result=result+str[i]*multiple(4,str.length-1-i);
   }
   return result;
 }
-toDec(10);
+toDec(1210);
