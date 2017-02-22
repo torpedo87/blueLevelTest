@@ -4,26 +4,15 @@
 //10진법의 수를 4진법의 수로 바꾸기 위해 나머지랑 인수를 얻기
 function to1230(num){
   var digitArr=[];
-  var dividedNum=num;
-  var remainder=dividedNum%4;
-  var int=(dividedNum-remainder)/4;
-  while(int>=4){
-    remainder=dividedNum%4;
-    int=(dividedNum-remainder)/4;
+  var remainder=0;
+  var int=num;
+  do{
+    remainder = int%4;
+    int = (int-remainder)/4;
     digitArr.push(remainder);
-    dividedNum=int;
-    if(int<4){
-      digitArr.push(int);
-      return digitArr;
-    }
   }
-  if(int<4){
-    digitArr.push(remainder);
-    if(int!==0){
-      digitArr.push(int);
-    }    
-    return digitArr;
-  }
+  while(int!==0)
+  return digitArr;
 }
 
 //얻은 나머지와 인수의 순서를 거꾸로

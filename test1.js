@@ -1,25 +1,14 @@
 function to1230(num){
   var digitArr=[];
-  var dividedNum=num;
-  var remainder=dividedNum%4;
-  var int=(dividedNum-remainder)/4;
-  while(int>=4){
-    remainder=dividedNum%4;
-    int=(dividedNum-remainder)/4;
+  var remainder=0;
+  var int=num;
+  do{
+    remainder = int%4;
+    int = (int-remainder)/4;
     digitArr.push(remainder);
-    dividedNum=int;
-    if(int<4){
-      digitArr.push(int);
-      return digitArr;
-    }
   }
-  if(int<4){
-    digitArr.push(remainder);
-    if(int!==0){
-      digitArr.push(int);
-    }    
-    return digitArr;
-  }
+  while(int!==0)
+  return digitArr;
 }
 
 function reverseArr(arr){
