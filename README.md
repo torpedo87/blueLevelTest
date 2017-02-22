@@ -19,7 +19,9 @@ function to1230(num){
   }
   if(int<4){
     digitArr.push(remainder);
-    digitArr.push(int);
+    if(int!==0){
+      digitArr.push(int);
+    }    
     return digitArr;
   }
 }
